@@ -35,9 +35,8 @@
     }
 
     /* LANG TOGGLE */
-    [data-lang="en"] { display: none; }
-    body.lang-en [data-lang="en"] { display: revert; }
-    body.lang-en [data-lang="ru"] { display: none; }
+    body:not(.lang-en) [data-lang="en"] { display: none !important; }
+    body.lang-en [data-lang="ru"] { display: none !important; }
 
     /* NAV */
     .nav {
@@ -285,27 +284,6 @@
       transition: all 0.25s;
     }
     .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.04); }
-    .hero-counters {
-      display: flex;
-      gap: 48px;
-      margin-top: 64px;
-      flex-wrap: wrap;
-    }
-    .counter-num {
-      font-family: var(--font-heading);
-      font-size: 42px;
-      font-weight: 800;
-      color: var(--lime);
-      line-height: 1;
-    }
-    .counter-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-top: 6px;
-    }
 
     /* SECTIONS */
     .section {
@@ -611,18 +589,6 @@
       margin-bottom: 20px;
       border: 1px solid rgba(255,255,255,0.2);
     }
-    .ticket-price {
-      font-family: var(--font-heading);
-      font-size: 52px;
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .ticket-price .currency {
-      font-size: 22px;
-      vertical-align: super;
-      color: rgba(255,255,255,0.45);
-    }
     .ticket-desc {
       font-size: 12px;
       color: rgba(255,255,255,0.35);
@@ -889,6 +855,36 @@
       font-size: 11px;
     }
 
+    /* PIXEL GRID */
+    .pixel-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      -webkit-mask-image:
+        linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 20%, rgba(0,0,0,0.6) 60%, black 85%),
+        linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 15%, black 40%, black 75%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 20%, rgba(0,0,0,0.6) 60%, black 85%),
+        linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 15%, black 40%, black 75%, transparent 100%);
+      mask-composite: intersect;
+      mix-blend-mode: difference;
+    }
+    .pixel-canvas canvas {
+      width: 100%;
+      height: 100%;
+      pointer-events: all;
+    }
+    @media (max-width: 768px) {
+      .pixel-canvas {
+        -webkit-mask-image:
+          linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.4) 60%, transparent 100%);
+        mask-image:
+          linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.4) 60%, transparent 100%);
+      }
+    }
+
     /* REVEAL */
     .reveal {
       opacity: 0;
@@ -921,8 +917,6 @@
       .section-full { padding: 72px 20px; }
       .pool-inner, .networking-inner { padding: 72px 20px; }
       .hero-inner { padding: 110px 20px 56px; }
-      .hero-counters { gap: 28px; }
-      .counter-num { font-size: 32px; }
     }
     @media (max-width: 480px) {
       .hero-title { letter-spacing: -1px; }
@@ -944,7 +938,7 @@
       <li><a href="#about" data-lang="ru">О событии</a><a href="#about" data-lang="en">About</a></li>
       <li><a href="#schedule" data-lang="ru">Расписание</a><a href="#schedule" data-lang="en">Schedule</a></li>
       <li><a href="#workshops" data-lang="ru">Воркшопы</a><a href="#workshops" data-lang="en">Workshops</a></li>
-      <li><a href="#tickets" data-lang="ru">Билеты</a><a href="#tickets" data-lang="en">Tickets</a></li>
+      <li><a href="#tickets" data-lang="ru">Участие</a><a href="#tickets" data-lang="en">Attend</a></li>
       <li><a href="#partners" data-lang="ru">Партнёры</a><a href="#partners" data-lang="en">Partners</a></li>
       <li><a href="#contacts" data-lang="ru">Контакты</a><a href="#contacts" data-lang="en">Contacts</a></li>
     </ul>
@@ -953,8 +947,8 @@
         <button class="lang-btn active" data-set-lang="ru">RU</button>
         <button class="lang-btn" data-set-lang="en">EN</button>
       </div>
-      <a href="#tickets" class="nav-cta desktop" data-lang="ru">Билеты</a>
-      <a href="#tickets" class="nav-cta desktop" data-lang="en">Tickets</a>
+      <a href="#tickets" class="nav-cta desktop" data-lang="ru">Записаться</a>
+      <a href="#tickets" class="nav-cta desktop" data-lang="en">Register</a>
       <button class="burger" id="burger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -966,6 +960,7 @@
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <div class="pixel-canvas"><canvas id="pixelGrid"></canvas></div>
   <div class="hero-inner">
 
     <!-- RU -->
@@ -978,7 +973,7 @@
         <div class="hero-date-text">МАЙ 2026<span>Ереван, Армения · Side Event MAC</span></div>
       </div>
       <div class="hero-buttons">
-        <a href="#tickets" class="btn-primary">Забрать билет</a>
+        <a href="#tickets" class="btn-primary">Записаться</a>
         <a href="#about" class="btn-outline">Подробнее</a>
       </div>
     </div>
@@ -993,32 +988,8 @@
         <div class="hero-date-text">MAY 2026<span>Yerevan, Armenia · MAC Side Event</span></div>
       </div>
       <div class="hero-buttons">
-        <a href="#tickets" class="btn-primary">Get Tickets</a>
+        <a href="#tickets" class="btn-primary">Register</a>
         <a href="#about" class="btn-outline">Learn More</a>
-      </div>
-    </div>
-
-    <div class="hero-counters">
-      <div>
-        <div class="counter-num" data-lang="ru">200+</div>
-        <div class="counter-num" data-lang="en">200+</div>
-        <div class="counter-label" data-lang="ru">Участников</div>
-        <div class="counter-label" data-lang="en">Attendees</div>
-      </div>
-      <div>
-        <div class="counter-num">2</div>
-        <div class="counter-label" data-lang="ru">Воркшопа</div>
-        <div class="counter-label" data-lang="en">Workshops</div>
-      </div>
-      <div>
-        <div class="counter-num">1</div>
-        <div class="counter-label" data-lang="ru">День</div>
-        <div class="counter-label" data-lang="en">Day</div>
-      </div>
-      <div>
-        <div class="counter-num">∞</div>
-        <div class="counter-label" data-lang="ru">Нетворкинг</div>
-        <div class="counter-label" data-lang="en">Networking</div>
       </div>
     </div>
   </div>
@@ -1112,8 +1083,7 @@
         <p data-lang="ru">Получите бейдж и познакомьтесь</p>
         <p data-lang="en">Get your badge and meet the crowd</p>
       </div>
-      <div class="schedule-badge badge-break" data-lang="ru">Welcome</div>
-      <div class="schedule-badge badge-break" data-lang="en">Welcome</div>
+      <div class="schedule-badge badge-break">Welcome</div>
     </div>
 
     <div class="schedule-item reveal">
@@ -1129,31 +1099,43 @@
     </div>
 
     <div class="schedule-item reveal">
-      <div class="schedule-time">11:15 – 12:00</div>
+      <div class="schedule-time">11:15 – 11:55</div>
       <div class="schedule-info">
-        <h4 data-lang="ru">Кейсы с рынка: что работает сейчас</h4>
-        <h4 data-lang="en">Market Cases: What Works Now</h4>
-        <p data-lang="ru">Разбор реальных ситуаций из платёжной индустрии</p>
-        <p data-lang="en">Breakdown of real situations in the payments industry</p>
+        <h4 data-lang="ru">Эксперт #1 — тема скоро</h4>
+        <h4 data-lang="en">Expert #1 — topic coming soon</h4>
+        <p data-lang="ru">Кейсы, техничка, реальный опыт</p>
+        <p data-lang="en">Cases, tech insights, real experience</p>
       </div>
-      <div class="schedule-badge badge-talk" data-lang="ru">Доклад</div>
-      <div class="schedule-badge badge-talk" data-lang="en">Talk</div>
+      <div class="schedule-badge badge-talk" data-lang="ru">Эксперт</div>
+      <div class="schedule-badge badge-talk" data-lang="en">Expert</div>
     </div>
 
     <div class="schedule-item reveal">
-      <div class="schedule-time">12:00 – 12:45</div>
+      <div class="schedule-time">11:55 – 12:35</div>
       <div class="schedule-info">
-        <h4 data-lang="ru">Техничка: архитектура и процессинг</h4>
-        <h4 data-lang="en">Tech: Architecture & Processing</h4>
-        <p data-lang="ru">Глубокое погружение в техническую сторону</p>
-        <p data-lang="en">Deep dive into the technical side</p>
+        <h4 data-lang="ru">Эксперт #2 — тема скоро</h4>
+        <h4 data-lang="en">Expert #2 — topic coming soon</h4>
+        <p data-lang="ru">Кейсы, техничка, реальный опыт</p>
+        <p data-lang="en">Cases, tech insights, real experience</p>
       </div>
-      <div class="schedule-badge badge-talk" data-lang="ru">Доклад</div>
-      <div class="schedule-badge badge-talk" data-lang="en">Talk</div>
+      <div class="schedule-badge badge-talk" data-lang="ru">Эксперт</div>
+      <div class="schedule-badge badge-talk" data-lang="en">Expert</div>
     </div>
 
     <div class="schedule-item reveal">
-      <div class="schedule-time">12:45 – 13:30</div>
+      <div class="schedule-time">12:35 – 13:15</div>
+      <div class="schedule-info">
+        <h4 data-lang="ru">Эксперт #3 — тема скоро</h4>
+        <h4 data-lang="en">Expert #3 — topic coming soon</h4>
+        <p data-lang="ru">Кейсы, техничка, реальный опыт</p>
+        <p data-lang="en">Cases, tech insights, real experience</p>
+      </div>
+      <div class="schedule-badge badge-talk" data-lang="ru">Эксперт</div>
+      <div class="schedule-badge badge-talk" data-lang="en">Expert</div>
+    </div>
+
+    <div class="schedule-item reveal">
+      <div class="schedule-time">13:15 – 14:00</div>
       <div class="schedule-info">
         <h4 data-lang="ru">Обед и нетворкинг</h4>
         <h4 data-lang="en">Lunch & Networking</h4>
@@ -1165,43 +1147,43 @@
     </div>
 
     <div class="schedule-item reveal">
-      <div class="schedule-time">13:30 – 14:30</div>
+      <div class="schedule-time">14:00 – 15:00</div>
       <div class="schedule-info">
-        <h4 data-lang="ru">Воркшоп #1</h4>
-        <h4 data-lang="en">Workshop #1</h4>
-        <p data-lang="ru">Практическая сессия по методам и инструментам</p>
-        <p data-lang="en">Hands-on session on methods and tools</p>
+        <h4 data-lang="ru">Дискуссионная панель — тема скоро</h4>
+        <h4 data-lang="en">Discussion Panel — topic coming soon</h4>
+        <p data-lang="ru">Открытая дискуссия экспертов и участников</p>
+        <p data-lang="en">Open discussion with experts and attendees</p>
+      </div>
+      <div class="schedule-badge badge-talk" data-lang="ru">Панель</div>
+      <div class="schedule-badge badge-talk" data-lang="en">Panel</div>
+    </div>
+
+    <div class="schedule-item reveal">
+      <div class="schedule-time">15:00 – 16:00</div>
+      <div class="schedule-info">
+        <h4 data-lang="ru">Воркшоп #1 — тема скоро</h4>
+        <h4 data-lang="en">Workshop #1 — topic coming soon</h4>
+        <p data-lang="ru">Практическая сессия</p>
+        <p data-lang="en">Hands-on session</p>
       </div>
       <div class="schedule-badge badge-workshop" data-lang="ru">Воркшоп</div>
       <div class="schedule-badge badge-workshop" data-lang="en">Workshop</div>
     </div>
 
     <div class="schedule-item reveal">
-      <div class="schedule-time">14:30 – 15:30</div>
+      <div class="schedule-time">16:00 – 17:00</div>
       <div class="schedule-info">
-        <h4 data-lang="ru">Воркшоп #2</h4>
-        <h4 data-lang="en">Workshop #2</h4>
-        <p data-lang="ru">Проблемы и решения: практический разбор</p>
-        <p data-lang="en">Problems & solutions: practical breakdown</p>
+        <h4 data-lang="ru">Воркшоп #2 — тема скоро</h4>
+        <h4 data-lang="en">Workshop #2 — topic coming soon</h4>
+        <p data-lang="ru">Практическая сессия</p>
+        <p data-lang="en">Hands-on session</p>
       </div>
       <div class="schedule-badge badge-workshop" data-lang="ru">Воркшоп</div>
       <div class="schedule-badge badge-workshop" data-lang="en">Workshop</div>
     </div>
 
     <div class="schedule-item reveal">
-      <div class="schedule-time">15:30 – 16:00</div>
-      <div class="schedule-info">
-        <h4 data-lang="ru">Закрытие программы</h4>
-        <h4 data-lang="en">Closing Remarks</h4>
-        <p data-lang="ru">Подведение итогов дня</p>
-        <p data-lang="en">Wrapping up the day</p>
-      </div>
-      <div class="schedule-badge badge-talk" data-lang="ru">Сцена</div>
-      <div class="schedule-badge badge-talk" data-lang="en">Stage</div>
-    </div>
-
-    <div class="schedule-item reveal">
-      <div class="schedule-time">16:00 – 19:00</div>
+      <div class="schedule-time">17:00 – 20:00</div>
       <div class="schedule-info">
         <h4 data-lang="ru">Pool Party & Нетворкинг</h4>
         <h4 data-lang="en">Pool Party & Networking</h4>
@@ -1213,12 +1195,11 @@
     </div>
 
     <div class="schedule-item reveal">
-      <div class="schedule-time">20:00 – ∞</div>
+      <div class="schedule-time">21:00 – ∞</div>
       <div class="schedule-info">
-        <h4 data-lang="ru">Afterparty</h4>
-        <h4 data-lang="en">Afterparty</h4>
-        <p data-lang="ru">Закрытый нетворкинг для держателей Gold-билетов</p>
-        <p data-lang="en">Exclusive networking for Gold ticket holders</p>
+        <h4>Afterparty</h4>
+        <p data-lang="ru">Закрытый нетворкинг в отдельной локации</p>
+        <p data-lang="en">Private networking at a separate venue</p>
       </div>
       <div class="schedule-badge badge-party">Afterparty</div>
     </div>
@@ -1240,19 +1221,19 @@
     <div class="workshops-grid">
       <div class="workshop-card reveal">
         <div class="workshop-num">01</div>
-        <h4 data-lang="ru">Методы и инструменты для платёжного бизнеса</h4>
-        <h4 data-lang="en">Methods & Tools for Payments Business</h4>
-        <p data-lang="ru">Разбираем рабочие подходы к интеграциям, роутингу, управлению конверсией и работе с отказами. Конкретные инструменты, которые можно применить сразу.</p>
-        <p data-lang="en">Exploring working approaches to integrations, routing, conversion management and decline handling. Concrete tools you can apply right away.</p>
-        <div class="workshop-meta"><span>13:30</span> – 14:30</div>
+        <h4 data-lang="ru">Тема скоро будет объявлена</h4>
+        <h4 data-lang="en">Topic Coming Soon</h4>
+        <p data-lang="ru">Практическая сессия в формате воркшопа. Не лекция — рабочая сессия, где вы сможете задать вопросы и разобрать реальные кейсы.</p>
+        <p data-lang="en">Hands-on workshop session. Not a lecture — a working session where you can ask questions and break down real cases.</p>
+        <div class="workshop-meta"><span>15:00</span> – 16:00</div>
       </div>
       <div class="workshop-card reveal">
         <div class="workshop-num">02</div>
-        <h4 data-lang="ru">Проблемы рынка и их решения</h4>
-        <h4 data-lang="en">Market Problems & Solutions</h4>
-        <p data-lang="ru">Берём реальные проблемы из зала и разбираем подходы к решению — compliance, риски, масштабирование, работа с партнёрами. Открытый формат.</p>
-        <p data-lang="en">We take real problems from the audience and break down solution approaches — compliance, risk, scaling, partner management. Open format.</p>
-        <div class="workshop-meta"><span>14:30</span> – 15:30</div>
+        <h4 data-lang="ru">Тема скоро будет объявлена</h4>
+        <h4 data-lang="en">Topic Coming Soon</h4>
+        <p data-lang="ru">Практическая сессия в формате воркшопа. Разбор методов и подходов, которые можно применить сразу после митапа.</p>
+        <p data-lang="en">Hands-on workshop session. Breakdown of methods and approaches you can apply right after the meetup.</p>
+        <div class="workshop-meta"><span>16:00</span> – 17:00</div>
       </div>
     </div>
   </div>
@@ -1264,14 +1245,14 @@
   <div class="pool-inner">
     <div class="pool-content">
       <div class="pool-text reveal">
-        <div class="section-tag" data-lang="ru">Отдых</div>
-        <div class="section-tag" data-lang="en">Chill</div>
+        <div class="section-tag" data-lang="ru">Нетворкинг</div>
+        <div class="section-tag" data-lang="en">Networking</div>
         <h2 data-lang="ru">Pool<br><span class="accent">Party</span></h2>
         <h2 data-lang="en">Pool<br><span class="accent">Party</span></h2>
-        <p data-lang="ru">После деловой части — расслабляемся у бассейна. Напитки, музыка и самый продуктивный нетворкинг, когда формальности позади.</p>
-        <p data-lang="en">After the business part — we unwind by the pool. Drinks, music and the most productive networking when formalities are behind.</p>
-        <p data-lang="ru">Лучшие контакты часто появляются не в зале, а у воды. Проверено.</p>
-        <p data-lang="en">The best contacts often happen not in the hall, but by the water. Proven.</p>
+        <p data-lang="ru">Программа закончилась — галстуки снимаем. Бассейн, бар, солнце и люди, с которыми стоит поговорить без повестки. Здесь не нужны визитки — достаточно подойти и сказать «привет».</p>
+        <p data-lang="en">The program is over — ties off. Pool, bar, sun and people worth talking to without an agenda. No business cards needed — just walk up and say hi.</p>
+        <p data-lang="ru">Половина полезных знакомств на ивентах случается не в зале, а после него. Мы просто делаем «после» максимально комфортным.</p>
+        <p data-lang="en">Half the valuable connections at events happen not during the program, but after. We just make the "after" as comfortable as possible.</p>
         <div class="pool-features">
           <div class="pool-feature" data-lang="ru">Бассейн</div>
           <div class="pool-feature" data-lang="en">Pool</div>
@@ -1292,55 +1273,51 @@
   <div class="section-header reveal">
     <div class="section-tag" data-lang="ru">Участие</div>
     <div class="section-tag" data-lang="en">Attend</div>
-    <h2 class="section-title" data-lang="ru">Билеты</h2>
-    <h2 class="section-title" data-lang="en">Tickets</h2>
+    <h2 class="section-title" data-lang="ru">Как попасть</h2>
+    <h2 class="section-title" data-lang="en">How to Get In</h2>
+    <p class="section-desc" data-lang="ru">Вход только по спискам. Запись через менеджера.</p>
+    <p class="section-desc" data-lang="en">Entry by invite list only. Register through a manager.</p>
   </div>
 
   <div class="tickets-grid">
     <div class="ticket-card reveal">
       <div class="ticket-label">Standard</div>
-      <div class="ticket-price">99<span class="currency"> €</span></div>
-      <div class="ticket-desc" data-lang="ru">Основная программа</div>
-      <div class="ticket-desc" data-lang="en">Main Program</div>
+      <div class="ticket-desc" data-lang="ru" style="margin-top:12px">Основная программа</div>
+      <div class="ticket-desc" data-lang="en" style="margin-top:12px">Main Program</div>
       <ul class="ticket-features">
-        <li data-lang="ru">Доступ ко всем докладам</li>
-        <li data-lang="en">Access to all talks</li>
+        <li data-lang="ru">3 эксперта и дискуссионная панель</li>
+        <li data-lang="en">3 experts and discussion panel</li>
         <li data-lang="ru">2 воркшопа</li>
         <li data-lang="en">2 workshops</li>
         <li data-lang="ru">Pool party & нетворкинг</li>
         <li data-lang="en">Pool party & networking</li>
         <li data-lang="ru">Кофе, обед и напитки</li>
         <li data-lang="en">Coffee, lunch & drinks</li>
-        <li data-lang="ru">Бейдж участника</li>
-        <li data-lang="en">Attendee badge</li>
         <li class="disabled" data-lang="ru">Afterparty</li>
         <li class="disabled" data-lang="en">Afterparty</li>
       </ul>
-      <a href="#" class="btn-ticket" data-lang="ru">Купить</a>
-      <a href="#" class="btn-ticket" data-lang="en">Buy Now</a>
+      <a href="https://t.me/hannahgostex" target="_blank" class="btn-ticket" data-lang="ru">Записаться</a>
+      <a href="https://t.me/hannahgostex" target="_blank" class="btn-ticket" data-lang="en">Register</a>
     </div>
 
     <div class="ticket-card featured reveal">
-      <div class="ticket-label">Gold</div>
-      <div class="ticket-price">179<span class="currency"> €</span></div>
-      <div class="ticket-desc" data-lang="ru">Программа + Afterparty</div>
-      <div class="ticket-desc" data-lang="en">Program + Afterparty</div>
+      <div class="ticket-label">Full Access</div>
+      <div class="ticket-desc" data-lang="ru" style="margin-top:12px">Программа + Afterparty</div>
+      <div class="ticket-desc" data-lang="en" style="margin-top:12px">Program + Afterparty</div>
       <ul class="ticket-features">
-        <li data-lang="ru">Доступ ко всем докладам</li>
-        <li data-lang="en">Access to all talks</li>
+        <li data-lang="ru">3 эксперта и дискуссионная панель</li>
+        <li data-lang="en">3 experts and discussion panel</li>
         <li data-lang="ru">2 воркшопа</li>
         <li data-lang="en">2 workshops</li>
         <li data-lang="ru">Pool party & нетворкинг</li>
         <li data-lang="en">Pool party & networking</li>
         <li data-lang="ru">Кофе, обед и напитки</li>
         <li data-lang="en">Coffee, lunch & drinks</li>
-        <li data-lang="ru">Бейдж участника</li>
-        <li data-lang="en">Attendee badge</li>
         <li data-lang="ru">Закрытый Afterparty</li>
         <li data-lang="en">Exclusive Afterparty</li>
       </ul>
-      <a href="#" class="btn-ticket" data-lang="ru">Купить</a>
-      <a href="#" class="btn-ticket" data-lang="en">Buy Now</a>
+      <a href="https://t.me/hannahgostex" target="_blank" class="btn-ticket" data-lang="ru">Записаться</a>
+      <a href="https://t.me/hannahgostex" target="_blank" class="btn-ticket" data-lang="en">Register</a>
     </div>
   </div>
 </section>
@@ -1354,8 +1331,8 @@
     <div class="reveal">
       <h2 data-lang="ru">Нетворкинг<br>& <span class="accent">Afterparty</span></h2>
       <h2 data-lang="en">Networking<br>& <span class="accent">Afterparty</span></h2>
-      <p data-lang="ru">Никаких шоу и концертов — только вы, напитки и правильные люди. Закрытое мероприятие для держателей Gold-билетов, где формальности закончились и начинается настоящий бизнес.</p>
-      <p data-lang="en">No shows or concerts — just you, drinks and the right people. A closed event for Gold ticket holders where formalities end and real business begins.</p>
+      <p data-lang="ru">Никаких шоу и концертов — только вы, напитки и правильные люди. Закрытое мероприятие для участников с Full Access, где формальности закончились и начинается настоящий бизнес.</p>
+      <p data-lang="en">No shows or concerts — just you, drinks and the right people. A closed event for Full Access attendees where formalities end and real business begins.</p>
     </div>
     <div class="networking-features reveal">
       <div class="nf-item" data-lang="ru">Напитки</div>
@@ -1458,8 +1435,8 @@
       <a href="#about" data-lang="en">About</a>
       <a href="#schedule" data-lang="ru">Расписание</a>
       <a href="#schedule" data-lang="en">Schedule</a>
-      <a href="#tickets" data-lang="ru">Билеты</a>
-      <a href="#tickets" data-lang="en">Tickets</a>
+      <a href="#tickets" data-lang="ru">Участие</a>
+      <a href="#tickets" data-lang="en">Attend</a>
       <a href="#contacts" data-lang="ru">Контакты</a>
       <a href="#contacts" data-lang="en">Contacts</a>
     </div>
@@ -1497,6 +1474,82 @@
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Pixel grid (matches original Gostex landing — small square cells)
+  (function() {
+    const canvas = document.getElementById('pixelGrid');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const CELL_PX = 22;
+    let cols, rows, cells, cw, ch;
+    const LIME = '#CCFF00';
+
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+      cols = Math.ceil(rect.width / CELL_PX);
+      rows = Math.ceil(rect.height / CELL_PX);
+      cw = rect.width / cols;
+      ch = rect.height / rows;
+      cells = new Float32Array(cols * rows);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function lightUp(cx, cy) {
+      if (cx >= 0 && cx < cols && cy >= 0 && cy < rows) {
+        cells[cy * cols + cx] = Math.max(cells[cy * cols + cx], 0.7 + Math.random() * 0.3);
+      }
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const cx = Math.floor((e.clientX - rect.left) / cw);
+      const cy = Math.floor((e.clientY - rect.top) / ch);
+      lightUp(cx, cy);
+    });
+
+    canvas.addEventListener('touchmove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const t = e.touches[0];
+      const cx = Math.floor((t.clientX - rect.left) / cw);
+      const cy = Math.floor((t.clientY - rect.top) / ch);
+      lightUp(cx, cy);
+    }, { passive: true });
+
+    let last = 0;
+    function tick(now) {
+      requestAnimationFrame(tick);
+      if (now - last < 100) return;
+      last = now;
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (Math.random() < 0.12) {
+        const rx = Math.floor(Math.random() * cols);
+        const ry = Math.floor(Math.random() * rows);
+        cells[ry * cols + rx] = Math.max(cells[ry * cols + rx], 0.4 + Math.random() * 0.6);
+      }
+
+      ctx.fillStyle = LIME;
+      for (let i = 0; i < cells.length; i++) {
+        if (cells[i] > 0.01) {
+          const x = (i % cols) * cw;
+          const y = Math.floor(i / cols) * ch;
+          ctx.globalAlpha = cells[i];
+          ctx.fillRect(x, y, cw, ch);
+          cells[i] *= 0.85;
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+    requestAnimationFrame(tick);
+  })();
 </script>
 
 </body>
