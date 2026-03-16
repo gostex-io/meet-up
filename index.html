@@ -567,9 +567,9 @@
     /* TICKETS */
     .tickets-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 28px;
-      max-width: 800px;
+      max-width: 420px;
       margin: 0 auto;
     }
     .ticket-card {
@@ -973,10 +973,11 @@
 
     <!-- RU -->
     <div data-lang="ru">
-      <div class="hero-side-badge"><span class="dot"></span> Закрытая встреча фаундеров и C-level платёжных решений</div>
+      <div class="hero-side-badge"><span class="dot"></span> GOSTEX MEETUP — закрытая встреча от команды Gostex</div>
       <h1 class="hero-title">GOSTEX<br><span class="accent">MEETUP</span></h1>
       <p class="hero-sub">Закрытая встреча от команды Gostex. Первый митап в сфере high-risk, где обсудим наши реальные перспективы и возможности, найдём решения существующих проблем, отдохнём в компании людей, с которыми по-настоящему приятно проводить время.</p>
-      <p class="hero-sub hero-sub-accent">Никаких посторонних лиц. Никаких навязчивых знакомств и ещё более навязчивых предложений о сотрудничестве. <strong>Комфорт, польза, отдых.</strong></p>
+      <p class="hero-sub">Никаких посторонних лиц. Никаких навязчивых знакомств и ещё более навязчивых предложений о сотрудничестве.</p>
+      <p class="hero-sub hero-sub-accent"><strong>Комфорт, польза, отдых.</strong></p>
       <div class="hero-date-block">
         <div class="hero-date-icon">25</div>
         <div class="hero-date-text">МАЙ 2026<span>Ереван, Армения</span></div>
@@ -989,10 +990,11 @@
 
     <!-- EN -->
     <div data-lang="en">
-      <div class="hero-side-badge"><span class="dot"></span> Closed meeting for founders & C-level in payment solutions</div>
+      <div class="hero-side-badge"><span class="dot"></span> GOSTEX MEETUP — a closed gathering by the Gostex team</div>
       <h1 class="hero-title">GOSTEX<br><span class="accent">MEETUP</span></h1>
       <p class="hero-sub">A closed gathering by the Gostex team. The first meetup in the high-risk industry to discuss real opportunities and prospects, find solutions to existing problems, and spend time with people you truly enjoy being around.</p>
-      <p class="hero-sub hero-sub-accent">No outsiders. No pushy introductions or even pushier partnership offers. <strong>Comfort, value, relaxation.</strong></p>
+      <p class="hero-sub">No outsiders. No pushy introductions or even pushier partnership offers.</p>
+      <p class="hero-sub hero-sub-accent"><strong>Comfort, value, relaxation.</strong></p>
       <div class="hero-date-block">
         <div class="hero-date-icon">25</div>
         <div class="hero-date-text">MAY 2026<span>Yerevan, Armenia</span></div>
@@ -1020,15 +1022,13 @@
 
         <div data-lang="ru">
           <h3>Комфорт. Польза. Отдых.</h3>
-          <p><strong>GOSTEX MEETUP</strong> — закрытая встреча от команды Gostex для фаундеров и C-level руководителей платёжных решений. Первый митап в сфере high-risk, где обсудим реальные перспективы и возможности, найдём решения существующих проблем.</p>
-          <p>Никаких посторонних лиц. Никаких навязчивых знакомств и ещё более навязчивых предложений о сотрудничестве. Только проверенные участники, прошедшие строгий отбор.</p>
+          <p>Только проверенные участники, прошедшие строгий отбор.</p>
           <p>После программы — бар, кальяны и нетворкинг в расслабленной атмосфере. Потому что лучшие сделки заключаются не в зале, а за дружеским разговором.</p>
         </div>
 
         <div data-lang="en">
           <h3>Comfort. Value. Relaxation.</h3>
-          <p><strong>GOSTEX MEETUP</strong> is a closed gathering by the Gostex team for founders and C-level executives in payment solutions. The first meetup in the high-risk industry to discuss real opportunities, find solutions, and build genuine connections.</p>
-          <p>No outsiders. No pushy introductions or partnership pitches. Only vetted participants who passed strict selection.</p>
+          <p>Only vetted participants who passed strict selection.</p>
           <p>After the program — bar, hookah and networking in a relaxed atmosphere. Because the best deals happen not in conference halls, but over friendly conversations.</p>
         </div>
 
@@ -1228,30 +1228,10 @@
   </div>
 
   <div class="tickets-grid">
-    <div class="ticket-card reveal">
-      <div class="ticket-label">Standard</div>
-      <div class="ticket-desc" data-lang="ru" style="margin-top:12px">Основная программа</div>
-      <div class="ticket-desc" data-lang="en" style="margin-top:12px">Main Program</div>
-      <ul class="ticket-features">
-        <li data-lang="ru">3 эксперта и дискуссионная панель</li>
-        <li data-lang="en">3 experts and discussion panel</li>
-        <li data-lang="ru">2 воркшопа</li>
-        <li data-lang="en">2 workshops</li>
-        <li data-lang="ru">Pool party & нетворкинг</li>
-        <li data-lang="en">Pool party & networking</li>
-        <li data-lang="ru">Кофе, обед и напитки</li>
-        <li data-lang="en">Coffee, lunch & drinks</li>
-        <li class="disabled" data-lang="ru">Afterparty</li>
-        <li class="disabled" data-lang="en">Afterparty</li>
-      </ul>
-      <a href="https://t.me/hannahgostex" target="_blank" class="btn-ticket" data-lang="ru">Записаться</a>
-      <a href="https://t.me/hannahgostex" target="_blank" class="btn-ticket" data-lang="en">Register</a>
-    </div>
-
     <div class="ticket-card featured reveal">
-      <div class="ticket-label">Full Access</div>
-      <div class="ticket-desc" data-lang="ru" style="margin-top:12px">Программа + Afterparty</div>
-      <div class="ticket-desc" data-lang="en" style="margin-top:12px">Program + Afterparty</div>
+      <div class="ticket-label">Gostex Meetup</div>
+      <div class="ticket-desc" data-lang="ru" style="margin-top:12px">Полная программа</div>
+      <div class="ticket-desc" data-lang="en" style="margin-top:12px">Full Program</div>
       <ul class="ticket-features">
         <li data-lang="ru">3 эксперта и дискуссионная панель</li>
         <li data-lang="en">3 experts and discussion panel</li>
@@ -1261,35 +1241,9 @@
         <li data-lang="en">Pool party & networking</li>
         <li data-lang="ru">Кофе, обед и напитки</li>
         <li data-lang="en">Coffee, lunch & drinks</li>
-        <li data-lang="ru">Закрытый Afterparty</li>
-        <li data-lang="en">Exclusive Afterparty</li>
       </ul>
       <a href="https://t.me/hannahgostex" target="_blank" class="btn-ticket" data-lang="ru">Записаться</a>
       <a href="https://t.me/hannahgostex" target="_blank" class="btn-ticket" data-lang="en">Register</a>
-    </div>
-  </div>
-</section>
-
-<!-- NETWORKING / AFTERPARTY -->
-<section class="networking" id="afterparty">
-  <div class="networking-bg"></div>
-  <div class="networking-inner">
-    <div class="section-tag" data-lang="ru">Вечер</div>
-    <div class="section-tag" data-lang="en">Evening</div>
-    <div class="reveal">
-      <h2 data-lang="ru">Нетворкинг<br>& <span class="accent">Afterparty</span></h2>
-      <h2 data-lang="en">Networking<br>& <span class="accent">Afterparty</span></h2>
-      <p data-lang="ru">Никаких шоу и концертов — только вы, напитки и правильные люди. Закрытое мероприятие для участников с Full Access, где формальности закончились и начинается настоящий бизнес.</p>
-      <p data-lang="en">No shows or concerts — just you, drinks and the right people. A closed event for Full Access attendees where formalities end and real business begins.</p>
-    </div>
-    <div class="networking-features reveal">
-      <div class="nf-item" data-lang="ru">Напитки</div>
-      <div class="nf-item" data-lang="en">Drinks</div>
-      <div class="nf-item">Networking</div>
-      <div class="nf-item" data-lang="ru">Закрытый формат</div>
-      <div class="nf-item" data-lang="en">Closed Format</div>
-      <div class="nf-item" data-lang="ru">Расслабленная атмосфера</div>
-      <div class="nf-item" data-lang="en">Relaxed Atmosphere</div>
     </div>
   </div>
 </section>
