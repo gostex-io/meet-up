@@ -752,13 +752,18 @@
       background: rgba(204,255,0,0.03);
     }
     .partner-item img {
-      height: 32px;
       width: auto;
       object-fit: contain;
       filter: brightness(0.9);
       transition: filter 0.3s;
     }
-    .partner-item img.logo-small {
+    .partners-sponsors .partner-item img {
+      height: 48px;
+    }
+    .partners-media .partner-item img {
+      height: 28px;
+    }
+    .partners-info .partner-item img {
       height: 24px;
     }
     .partner-item:hover img {
@@ -1276,7 +1281,7 @@
       <h2 class="section-title" data-lang="en">Partners</h2>
     </div>
 
-    <div class="partners-sub reveal">
+    <div class="partners-sub partners-sponsors reveal">
       <h3 data-lang="ru">Спонсоры</h3>
       <h3 data-lang="en">Sponsors</h3>
       <div class="partners-row">
@@ -1286,16 +1291,16 @@
       </div>
     </div>
 
-    <div class="partners-sub reveal">
+    <div class="partners-sub partners-media reveal">
       <h3 data-lang="ru">Медиапартнёры</h3>
       <h3 data-lang="en">Media Partners</h3>
       <div class="partners-row">
-        <div class="partner-item"><img class="logo-small" src="./source/p2private-logo.svg" alt="P2Private"></div>
+        <div class="partner-item"><img src="./source/p2private-logo.svg" alt="P2Private"></div>
         <div class="partner-item"><img src="./source/satoshkin-logo.png" alt="Satoshkin"></div>
       </div>
     </div>
 
-    <div class="partners-sub reveal">
+    <div class="partners-sub partners-info reveal">
       <h3 data-lang="ru">Информационные партнёры</h3>
       <h3 data-lang="en">Info Partners</h3>
       <div class="partners-row">
