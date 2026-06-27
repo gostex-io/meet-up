@@ -179,9 +179,23 @@
       padding: 140px 28px 80px;
       width: 100%;
       pointer-events: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
     }
     .hero-inner a, .hero-inner button {
       pointer-events: auto;
+    }
+    .hero-poster {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-poster img {
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid rgba(204,255,0,0.15);
     }
     .hero-side-badge {
       display: inline-flex;
@@ -944,6 +958,8 @@
 
     /* RESPONSIVE */
     @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-poster { order: -1; }
       .about-grid, .pool-content { grid-template-columns: 1fr; gap: 40px; }
     }
     @media (max-width: 768px) {
@@ -1044,6 +1060,9 @@
         <a href="https://t.me/hannahgostex" target="_blank" class="btn-primary">Register</a>
         <a href="#schedule" class="btn-outline">Learn More</a>
       </div>
+    </div>
+    <div class="hero-poster">
+      <img src="./source/hero-poster.png" alt="Секретные гости — Gostex Meetup">
     </div>
   </div>
 </section>
